@@ -1,1 +1,163 @@
-Notebook[{}]
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6650,        155]
+NotebookOptionsPosition[      5396,        124]
+NotebookOutlinePosition[      5910,        142]
+CellTagsIndexPosition[      5867,        139]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Term Project", "Title",
+ CellChangeTimes->{{3.877630525715209*^9, 
+  3.877630530564026*^9}},ExpressionUUID->"772eecd6-2cba-46f6-8515-\
+927d4f92ed29"],
+
+Cell[CellGroupData[{
+
+Cell["Project Proposal", "Subsection",
+ CellChangeTimes->{{3.877630596990055*^9, 
+  3.8776306012126045`*^9}},ExpressionUUID->"886d96ea-20df-475f-8f6f-\
+d4eadf54e667"],
+
+Cell["\<\
+1. Our project will be to create a 3D simulation that models launching an \
+object from the earth into space and plotting its trajectory, as well as the \
+landing location, if it does land. We plan on starting with just a simulation \
+of launching the object and it coming back to earth so we can understand how \
+to represent the simplest form of projectile motion. When we finish this, we \
+will consider how to launch the object in such a way that it will reach the \
+point at which it would start orbiting the earth. We will then consider \
+additional components in our calculations like air resistance, how long the \
+force of thrust should be applied, how using fuel changes the situation (i.e. \
+the mass of the object changes as fuel is expended), and other components \
+that we haven\[CloseCurlyQuote]t yet accounted for. Our goal is to create a \
+module that produces a 3D graph plotting the trajectory of the projectile \
+around the earth given certain input parameters.
+
+2. To start, we will split up the research into the components listed above. \
+Nicolas will investigate the relationship between fuel consumption and force, \
+while Jason will research how to treat air resistance considering the \
+changing density of the atmosphere with altitude. Both of us will look into \
+the formulas behind projectile motion and objects orbiting the earth because \
+neither of us are completely familiar with those topics. The first major \
+milestone will be to create a 2D graph of projectile motion. The second major \
+milestone will be to create a 2D graph of orbital motion around the earth. \
+From there, we will model the same situations in 3D. Finally, we will \
+individually add in the components we were each responsible for researching \
+(fuel consumption, air resistance).
+
+3. Our project will require analysis in the following areas: projectile \
+motion, orbital motion/mechanics, air resistance, and the relationship \
+between the mass of the fuel and the thrust it can provide. We will need to \
+thoroughly understand how to create 3D graphs in Mathematica. These graphs \
+will probably require space curves. We will analyze how each of the \
+\[OpenCurlyDoubleQuote]additional\[CloseCurlyDoubleQuote] components we \
+consider (air resistance, fuel/mass relationship, etc) interact with the \
+other components, if they do. We will also need to make sure that our graph \
+clearly shows where the object is as a function of time.
+
+4. Problems could arise if we mix up variables in our code or we don\
+\[CloseCurlyQuote]t correctly incorporate certain factors, meaning we \
+misunderstand how one component impacts the other components. An example of \
+this would be forgetting to account for the change in mass of the \
+object/rocket as fuel is used up to enable thrust against the force of \
+gravity, which changes with distance from the earth. Many other important \
+issues we will need to carefully address are related to the 3D graph. How \
+will we make the graph a function of time instead of space? How will we \
+represent unsuccessful orbital paths on the graph? Can we model several paths \
+at once? How will we model the earth and objects hitting the surface of the \
+earth? We will need to ensure that the scale of the graph is such that the \
+graph is useful and readable.\
+\>", "Text",
+ CellChangeTimes->{{3.8776305333228855`*^9, 3.8776305343159227`*^9}, {
+   3.877630586953127*^9, 3.8776305928398848`*^9}, 
+   3.877630630957018*^9},ExpressionUUID->"f6a19792-8617-447d-a29f-\
+817108286395"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["First Milestone", "Subsection",
+ CellChangeTimes->{{3.8776310085397606`*^9, 
+  3.8776310153370953`*^9}},ExpressionUUID->"d92e7714-2f41-4a81-9795-\
+e2a6ef7136b1"],
+
+Cell["\<\
+The first major milestone will be to create a 2D graph of projectile motion.\
+\>", "Text",
+ CellChangeTimes->{
+  3.8776310236038027`*^9},ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-\
+88151f56accf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Second Milestone", "Subsection",
+ CellChangeTimes->{{3.877631026757095*^9, 
+  3.8776310316897635`*^9}},ExpressionUUID->"fd45afbd-6b8a-4bde-8c53-\
+5305dce47526"],
+
+Cell["\<\
+The second major milestone will be to create a 2D graph of orbital motion \
+around the earth.\
+\>", "Text",
+ CellChangeTimes->{
+  3.8776310816308484`*^9},ExpressionUUID->"3a8037e1-a1a0-4a18-9639-\
+d253c9272ec5"],
+
+Cell["", "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1152., 580.5},
+WindowMargins->{{
+  Automatic, -4.7999999999999545`}, {-4.7999999999999545`, Automatic}},
+FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (August 22, 2022)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"b6d0dc75-38c7-44e7-b2a8-adc115f0b164"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 155, 3, 96, "Title",ExpressionUUID->"772eecd6-2cba-46f6-8515-927d4f92ed29"],
+Cell[CellGroupData[{
+Cell[760, 29, 166, 3, 34, "Subsection",ExpressionUUID->"886d96ea-20df-475f-8f6f-d4eadf54e667"],
+Cell[929, 34, 3527, 53, 540, "Text",ExpressionUUID->"f6a19792-8617-447d-a29f-817108286395"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4493, 92, 167, 3, 34, "Subsection",ExpressionUUID->"d92e7714-2f41-4a81-9795-e2a6ef7136b1"],
+Cell[4663, 97, 204, 5, 34, "Text",ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-88151f56accf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4904, 107, 166, 3, 34, "Subsection",ExpressionUUID->"fd45afbd-6b8a-4bde-8c53-5305dce47526"],
+Cell[5073, 112, 221, 6, 34, "Text",ExpressionUUID->"3a8037e1-a1a0-4a18-9639-d253c9272ec5"],
+Cell[5297, 120, 71, 0, 34, "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
