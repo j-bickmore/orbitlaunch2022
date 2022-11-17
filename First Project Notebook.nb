@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      7369,        166]
-NotebookOptionsPosition[      6213,        137]
-NotebookOutlinePosition[      6627,        153]
-CellTagsIndexPosition[      6584,        150]
+NotebookDataLength[      9595,        219]
+NotebookOptionsPosition[      8343,        189]
+NotebookOutlinePosition[      8757,        205]
+CellTagsIndexPosition[      8714,        202]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -105,9 +105,61 @@ hoping for it to include the past positions of where the object was. \
  CellChangeTimes->{
   3.8776310236038027`*^9, {3.877631362978942*^9, 3.8776314712505345`*^9}, {
    3.877631581194212*^9, 3.8776316798208265`*^9}, {3.877631731907736*^9, 
-   3.877631840417287*^9}, {3.8776319541504173`*^9, 
-   3.877632017066743*^9}},ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-\
-88151f56accf"]
+   3.877631840417287*^9}, {3.8776319541504173`*^9, 3.877632017066743*^9}, {
+   3.877634925031623*^9, 
+   3.8776349410021386`*^9}},ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-\
+88151f56accf"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"velocitymodue", "[", 
+   RowBox[{"velocityx_", ",", " ", "velocityy_", ",", " ", "mass_"}], "]"}], ":=",
+   " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "vx", ",", " ", "vy", ",", " ", "px", ",", " ", "py", ",", " ", "t", ",",
+       " ", 
+      RowBox[{"ag", "=", 
+       RowBox[{"-", "9.8"}]}], ",", " ", "landingtime"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"px", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"py", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"vx", "=", "velocityx"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"vy", "=", 
+      RowBox[{"velocityy", "-", 
+       RowBox[{"ag", " ", "t"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{"py", "\[GreaterEqual]", "0"}], ",", " ", 
+       RowBox[{"(*", 
+        RowBox[{"stopping", " ", "at", " ", "the", " ", "ground"}], "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"px", "=", 
+         RowBox[{"vx", " ", "t"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"py", "=", 
+         RowBox[{
+          RowBox[{"vy", " ", "t"}], " ", "+", " ", 
+          RowBox[{"ag", " ", 
+           RowBox[{"t", "^", "2"}]}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"landingtime", "=", " ", 
+         RowBox[{"vy", "/", "ag"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Animate", "[", 
+         RowBox[{"Graphics", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"px", ",", "py"}], "}"}], ",", " ", 
+           "\[IndentingNewLine]"}]}]}]}]}]}]}]}]}]}]], "Input",
+ CellChangeTimes->{{3.8776349446574717`*^9, 3.8776352856167927`*^9}, {
+  3.877635371475106*^9, 3.8776354038901553`*^9}, {3.87763553077737*^9, 
+  3.8776355399671316`*^9}, {3.8776356081010323`*^9, 3.8776356669131975`*^9}, {
+  3.8776357322344537`*^9, 3.877635778533801*^9}, {3.8776358277036715`*^9, 
+  3.877635827873825*^9}, {3.8776359058700705`*^9, 
+  3.8776359186729546`*^9}},ExpressionUUID->"ecc4066e-3f48-4da1-bcbb-\
+212adfde0edc"]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -160,12 +212,13 @@ Cell[929, 34, 3527, 53, 540, "Text",ExpressionUUID->"f6a19792-8617-447d-a29f-817
 }, Closed]],
 Cell[CellGroupData[{
 Cell[4493, 92, 167, 3, 33, "Subsection",ExpressionUUID->"d92e7714-2f41-4a81-9795-e2a6ef7136b1"],
-Cell[4663, 97, 632, 12, 99, "Text",ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-88151f56accf"]
+Cell[4663, 97, 684, 13, 99, "Text",ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-88151f56accf"],
+Cell[5350, 112, 2075, 49, 230, "Input",ExpressionUUID->"ecc4066e-3f48-4da1-bcbb-212adfde0edc"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[5332, 114, 166, 3, 33, "Subsection",ExpressionUUID->"fd45afbd-6b8a-4bde-8c53-5305dce47526"],
-Cell[5501, 119, 610, 12, 77, "Text",ExpressionUUID->"3a8037e1-a1a0-4a18-9639-d253c9272ec5"],
-Cell[6114, 133, 71, 0, 33, "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
+Cell[7462, 166, 166, 3, 33, "Subsection",ExpressionUUID->"fd45afbd-6b8a-4bde-8c53-5305dce47526"],
+Cell[7631, 171, 610, 12, 77, "Text",ExpressionUUID->"3a8037e1-a1a0-4a18-9639-d253c9272ec5"],
+Cell[8244, 185, 71, 0, 33, "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
 }, Open  ]]
 }, Open  ]]
 }
