@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      6650,        155]
-NotebookOptionsPosition[      5396,        124]
-NotebookOutlinePosition[      5910,        142]
-CellTagsIndexPosition[      5867,        139]
+NotebookDataLength[      7369,        166]
+NotebookOptionsPosition[      6213,        137]
+NotebookOutlinePosition[      6627,        153]
+CellTagsIndexPosition[      6584,        150]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -96,10 +96,17 @@ Cell["First Milestone", "Subsection",
 e2a6ef7136b1"],
 
 Cell["\<\
-The first major milestone will be to create a 2D graph of projectile motion.\
+The first major milestone will be to create a 2D graph of projectile motion.
+
+We would be animating one object which is the projectile. One axis would be \
+the ground and the other axis would be the height above the ground. We are \
+hoping for it to include the past positions of where the object was. \
 \>", "Text",
  CellChangeTimes->{
-  3.8776310236038027`*^9},ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-\
+  3.8776310236038027`*^9, {3.877631362978942*^9, 3.8776314712505345`*^9}, {
+   3.877631581194212*^9, 3.8776316798208265`*^9}, {3.877631731907736*^9, 
+   3.877631840417287*^9}, {3.8776319541504173`*^9, 
+   3.877632017066743*^9}},ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-\
 88151f56accf"]
 }, Open  ]],
 
@@ -112,23 +119,27 @@ Cell["Second Milestone", "Subsection",
 
 Cell["\<\
 The second major milestone will be to create a 2D graph of orbital motion \
-around the earth.\
+around the earth. 
+Two objects will be animated, where one is the earth, which wouldn\
+\[CloseCurlyQuote]t move. The second would be the rocket\[CloseCurlyQuote]s \
+position. For this one, the plot will be on an {x,y} axis with the time \
+factor changing. \
 \>", "Text",
  CellChangeTimes->{
-  3.8776310816308484`*^9},ExpressionUUID->"3a8037e1-a1a0-4a18-9639-\
+  3.8776310816308484`*^9, {3.8776315478906846`*^9, 3.877631576668162*^9}, {
+   3.8776317073524*^9, 3.8776317145002327`*^9}, {3.8776317616324596`*^9, 
+   3.877631763160509*^9}},ExpressionUUID->"3a8037e1-a1a0-4a18-9639-\
 d253c9272ec5"],
 
 Cell["", "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
 }, Open  ]]
 }, Open  ]]
 },
-WindowSize->{1152., 580.5},
-WindowMargins->{{
-  Automatic, -4.7999999999999545`}, {-4.7999999999999545`, Automatic}},
-FrontEndVersion->"13.1 for Microsoft Windows (64-bit) (August 22, 2022)",
+WindowSize->{1152, 581},
+WindowMargins->{{26, Automatic}, {-6, Automatic}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
 StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
-  CharacterEncoding -> "UTF-8"],
-ExpressionUUID->"b6d0dc75-38c7-44e7-b2a8-adc115f0b164"
+  CharacterEncoding -> "UTF-8"]
 ]
 (* End of Notebook Content *)
 
@@ -142,19 +153,19 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 155, 3, 96, "Title",ExpressionUUID->"772eecd6-2cba-46f6-8515-927d4f92ed29"],
+Cell[580, 22, 155, 3, 95, "Title",ExpressionUUID->"772eecd6-2cba-46f6-8515-927d4f92ed29"],
 Cell[CellGroupData[{
-Cell[760, 29, 166, 3, 34, "Subsection",ExpressionUUID->"886d96ea-20df-475f-8f6f-d4eadf54e667"],
+Cell[760, 29, 166, 3, 33, "Subsection",ExpressionUUID->"886d96ea-20df-475f-8f6f-d4eadf54e667"],
 Cell[929, 34, 3527, 53, 540, "Text",ExpressionUUID->"f6a19792-8617-447d-a29f-817108286395"]
 }, Closed]],
 Cell[CellGroupData[{
-Cell[4493, 92, 167, 3, 34, "Subsection",ExpressionUUID->"d92e7714-2f41-4a81-9795-e2a6ef7136b1"],
-Cell[4663, 97, 204, 5, 34, "Text",ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-88151f56accf"]
+Cell[4493, 92, 167, 3, 33, "Subsection",ExpressionUUID->"d92e7714-2f41-4a81-9795-e2a6ef7136b1"],
+Cell[4663, 97, 632, 12, 99, "Text",ExpressionUUID->"95dcaf0f-7fa5-42d0-9bb0-88151f56accf"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[4904, 107, 166, 3, 34, "Subsection",ExpressionUUID->"fd45afbd-6b8a-4bde-8c53-5305dce47526"],
-Cell[5073, 112, 221, 6, 34, "Text",ExpressionUUID->"3a8037e1-a1a0-4a18-9639-d253c9272ec5"],
-Cell[5297, 120, 71, 0, 34, "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
+Cell[5332, 114, 166, 3, 33, "Subsection",ExpressionUUID->"fd45afbd-6b8a-4bde-8c53-5305dce47526"],
+Cell[5501, 119, 610, 12, 77, "Text",ExpressionUUID->"3a8037e1-a1a0-4a18-9639-d253c9272ec5"],
+Cell[6114, 133, 71, 0, 33, "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
 }, Open  ]]
 }, Open  ]]
 }
