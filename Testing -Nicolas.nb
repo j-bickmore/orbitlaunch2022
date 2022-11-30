@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     14872,        366]
-NotebookOptionsPosition[     13773,        338]
-NotebookOutlinePosition[     14115,        353]
-CellTagsIndexPosition[     14072,        350]
+NotebookDataLength[     15602,        383]
+NotebookOptionsPosition[     14408,        354]
+NotebookOutlinePosition[     14750,        369]
+CellTagsIndexPosition[     14707,        366]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -291,7 +291,7 @@ atpHc5STKMWCwSyZRv1zG346f0QLyaT6tM+oYXxeuvAVdQo6UV6nRUPauqID
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`a$$ = 8.531957626342773, Typeset`show$$ = 
+   DynamicModuleBox[{$CellContext`a$$ = 2.9616470336914062`, Typeset`show$$ = 
     True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{
@@ -333,7 +333,23 @@ Cell[BoxData[
   3.8788253938300467`*^9, {3.878825454268033*^9, 3.8788254806127157`*^9}, {
    3.8788255165211067`*^9, 3.8788255285958138`*^9}, 3.878825619714452*^9},
  CellLabel->"Out[23]=",ExpressionUUID->"ac326d27-e15c-4ef8-8322-1bce98b44078"]
-}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+   RowBox[{
+   "So", " ", "it", " ", "worked", " ", "for", " ", "a", " ", "parametric", 
+    " ", 
+    RowBox[{"plot", ".", " ", 
+     RowBox[{"I", "'"}]}], "m", " ", "guessing", " ", "that", " ", "there", 
+    " ", "was", " ", "a", " ", "problem", " ", "in", " ", "the", " ", 
+    "nesting", " ", "of", " ", "the", " ", "two", " ", "functions", " ", 
+    "between", " ", "Animate"}], ",", " ", "Show", ",", " ", 
+   RowBox[{"and", " ", "Graphic"}]}]}]], "Input",
+ CellChangeTimes->{{3.878825673515453*^9, 
+  3.878825735487631*^9}},ExpressionUUID->"0321d5bd-fc5b-4874-a252-\
+5b754e2db748"]
 }, Open  ]]
 },
 WindowSize->{766, 764},
@@ -365,8 +381,9 @@ Cell[5631, 153, 2094, 42, 321, "Output",ExpressionUUID->"851a5234-2aa0-4c76-8dce
 Cell[CellGroupData[{
 Cell[7762, 200, 1491, 36, 86, "Input",ExpressionUUID->"b112d976-67ae-4541-baba-7b0f22b728f5"],
 Cell[9256, 238, 2225, 50, 377, "Output",ExpressionUUID->"fc62b24f-fdf4-401f-bb9b-ce6c02cb9cdb"],
-Cell[11484, 290, 2261, 44, 490, "Output",ExpressionUUID->"ac326d27-e15c-4ef8-8322-1bce98b44078"]
-}, Open  ]]
+Cell[11484, 290, 2263, 44, 457, "Output",ExpressionUUID->"ac326d27-e15c-4ef8-8322-1bce98b44078"]
+}, Open  ]],
+Cell[13762, 337, 630, 14, 67, "Input",ExpressionUUID->"0321d5bd-fc5b-4874-a252-5b754e2db748"]
 }, Open  ]]
 }
 ]
