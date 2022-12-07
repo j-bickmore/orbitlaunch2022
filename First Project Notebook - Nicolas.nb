@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     30865,        699]
-NotebookOptionsPosition[     29507,        668]
-NotebookOutlinePosition[     29919,        684]
-CellTagsIndexPosition[     29876,        681]
+NotebookDataLength[     33654,        741]
+NotebookOptionsPosition[     32296,        710]
+NotebookOutlinePosition[     32708,        726]
+CellTagsIndexPosition[     32665,        723]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -408,209 +408,193 @@ IiJ6BTxTZEa3BxEREdF9/A9ZTrvF
    3.8790875537609186`*^9}},ExpressionUUID->"3a8037e1-a1a0-4a18-9639-\
 d253c9272ec5"],
 
-Cell[BoxData[
+Cell[BoxData[{
  RowBox[{
-  RowBox[{"twoStageOrbit", "[", 
+  RowBox[{"TwoStageOrbitIncremented", "[", 
    RowBox[{
-   "thrustx_", ",", "thrusty_", ",", "timeThrustApplied_", ",", "mass_"}], 
-   "]"}], ":=", 
+   "thrustx_", ",", "thrusty_", ",", "timeThrustApplied_", ",", "mass_", ",", 
+    "simulationRuntime_", ",", "initialHeight_"}], "]"}], ":=", 
   RowBox[{"Module", "[", 
    RowBox[{
     RowBox[{"{", 
      RowBox[{
      "massEarth", ",", "radiusEarth", ",", "centerOfEarth", ",", "bigG", ",", 
-      "fGravity", ",", "r", ",", "maxAirTime", ",", "force", ",", "acc", ",", 
-      "vel", ",", "pos", ",", "t", ",", "closestToEarth", ",", 
-      "timeClosestToEarth", ",", "timeToGround", ",", "thrustPlot", ",", 
-      "freefallPlot", ",", "earthObject"}], "}"}], ",", "\[IndentingNewLine]", 
+      "pointDensity", ",", "currentPos", ",", "nextPos", ",", "currentVel", 
+      ",", "nextVel", ",", "r", ",", "forceGravitation", ",", "force", ",", 
+      "acc", ",", "t", ",", "closestToEarth", ",", "timeClosestToEarth", ",", 
+      "timeToGround", ",", "projectileTrackingPoints", ",", 
+      "trackingPointsPlot", ",", " ", "plotBound", ",", "minLEO", ",", 
+      "maxLEO", ",", "minMEO", ",", "maxMEO", ",", "earthObject", ",", 
+      "LEOring", ",", "MEOring"}], "}"}], ",", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
     RowBox[{"(*", 
-     RowBox[{"define", " ", "constants"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"define", " ", "constants", " ", "in", " ", "SI", " ", "units"}],
+      "*)"}], "\[IndentingNewLine]", 
     RowBox[{
-     RowBox[{"g", "=", 
-      RowBox[{"-", "9.8"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"massEarth", "=", "100"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"radiusEarth", "=", "70"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"massEarth", "=", "5.97219*^24"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"radiusEarth", "=", "6.3781*^6"}], ";", "\[IndentingNewLine]", 
      RowBox[{"centerOfEarth", "=", 
       RowBox[{"{", 
        RowBox[{"0", ",", "0"}], "}"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"bigG", "=", "10"}], ";", "\[IndentingNewLine]", 
-     RowBox[{"r", ":=", 
-      RowBox[{"centerOfEarth", "-", "pos"}]}], ";", " ", 
-     RowBox[{"(*", 
-      RowBox[{
-      "r", " ", "is", " ", "a", " ", "vector", " ", "from", " ", "the", " ", 
-       "projectile", " ", "to", " ", "the", " ", "center", " ", "of", " ", 
-       "the", " ", "earth"}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{"forceGravitation", ":="}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"fGravity", "=", 
-      RowBox[{"mass", " ", "bigG", " ", 
-       RowBox[{"massEarth", " ", "/", 
-        RowBox[{"(", 
-         RowBox[{"r", "^", "2"}], ")"}]}]}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"maxAirTime", "=", "20"}], ";", " ", 
-     RowBox[{"(*", 
-      RowBox[{
-      "maxAirTime", " ", "is", " ", "maximum", " ", "time", " ", "we", " ", 
-       "will", " ", "let", " ", "a", " ", "projectile", " ", "remain", " ", 
-       "in", " ", "the", " ", "air", " ", "before", " ", "we", " ", "declare",
-        " ", "it", " ", "as", " ", "\"\<in orbit or lost\>\""}], "*)"}], 
-     "\[IndentingNewLine]", "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{"thrust", " ", "stage"}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"force", "=", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"thrustx", ",", "thrusty"}], "}"}], "-", "fGravity"}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"acc", "=", 
-      RowBox[{"force", "/", "mass"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"vel", "=", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0", ",", "0"}], "}"}], "+", 
-       RowBox[{"Integrate", "[", 
-        RowBox[{"acc", ",", "t"}], "]"}]}]}], ";", " ", 
-     RowBox[{"(*", 
-      RowBox[{"No", " ", "initial", " ", "velocity"}], "*)"}], 
-     "\[IndentingNewLine]", 
-     RowBox[{"pos", "=", 
-      RowBox[{
-       RowBox[{"{", 
-        RowBox[{"0", ",", "radiusEarth"}], "}"}], "+", 
-       RowBox[{"Integrate", "[", 
-        RowBox[{"vel", ",", "t"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"bigG", "=", "6.6743*^-11"}], ";", "\[IndentingNewLine]", 
+     "simulationRuntime", ";", "\[IndentingNewLine]", 
+     RowBox[{"pointDensity", "=", 
+      RowBox[{"1", "/", "100"}]}], ";", "\[IndentingNewLine]", 
      "\[IndentingNewLine]", 
      RowBox[{"(*", 
-      RowBox[{
-      "set", " ", "up", " ", "the", " ", "parametric", " ", "plot", " ", 
-       "for", " ", "thrust", " ", "stage"}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"thrustPlot", "=", 
-      RowBox[{"ParametricPlot", "[", 
-       RowBox[{"pos", ",", 
-        RowBox[{"{", 
-         RowBox[{"t", ",", "0", ",", "timeThrustApplied"}], "}"}], ",", 
-        RowBox[{"PlotStyle", "->", 
-         RowBox[{"{", 
-          RowBox[{"Blue", ",", " ", "Dashed"}], "}"}]}]}], "]"}]}], ";", 
-     "\[IndentingNewLine]", "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{"freefall", " ", "stage"}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"force", "=", 
+      RowBox[{"initialize", " ", "variables"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"currentPos", "=", 
       RowBox[{"{", 
        RowBox[{"0", ",", 
-        RowBox[{"mass", "*", "g"}]}], "}"}]}], ";", " ", 
-     RowBox[{"(*", 
-      RowBox[{
-      "because", " ", "the", " ", "projectile", " ", "is", " ", "in", " ", 
-       "freefall"}], "*)"}], " ", "\[IndentingNewLine]", 
-     RowBox[{"acc", "=", 
-      RowBox[{"force", "/", "mass"}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"vel", "=", 
-      RowBox[{
-       RowBox[{"(", 
-        RowBox[{"vel", "/.", 
-         RowBox[{"t", "->", "timeThrustApplied"}]}], ")"}], "+", 
-       RowBox[{"Integrate", "[", 
-        RowBox[{"acc", ",", "t"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
-     RowBox[{"pos", "=", 
-      RowBox[{
-       RowBox[{"(", 
-        RowBox[{"pos", "/.", 
-         RowBox[{"t", "->", "timeThrustApplied"}]}], ")"}], "+", 
-       RowBox[{"Integrate", "[", 
-        RowBox[{"vel", ",", "t"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"radiusEarth", "+", "initialHeight"}]}], "}"}]}], ";", 
      "\[IndentingNewLine]", 
+     RowBox[{"currentVel", "=", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0"}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"projectileTrackingPoints", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
      RowBox[{"(*", 
       RowBox[{
-      "calculate", " ", "the", " ", "time", " ", "it", " ", "will", " ", 
-       "take", " ", "the", " ", "projectile", " ", "to", " ", "reach", " ", 
-       "the", " ", "surface", " ", "of", " ", "the", " ", "Earth"}], "*)"}], 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{"first", ",", " ", 
-       RowBox[{
-       "find", " ", "a", " ", "local", " ", "minimum", " ", "that", " ", 
-        "represents", " ", "the", " ", "closest", " ", "the", " ", 
-        "projectile", " ", "gets", " ", "to", " ", "the", " ", "center", " ", 
-        "of", " ", "the", " ", "earth"}]}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"closestToEarth", "=", 
-      RowBox[{"FindMinimum", "[", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"Norm", "[", "r", "]"}], ",", 
-          RowBox[{"t", ">", "0"}]}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"t", ",", "maxAirTime"}], "}"}]}], "]"}]}], ";", " ", 
-     RowBox[{"(*", 
+       RowBox[{"Print", "[", 
+        RowBox[{
+        "\"\<thrust x: \>\"", ",", "thrustx", ",", "\"\<, thrust y: \>\"", 
+         ",", "thrusty"}], "]"}], ";"}], " ", 
+      RowBox[{"(*", 
+       RowBox[{"TEMP", " ", "REMOVE", " ", "THIS"}], "*)"}], "*)"}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"For", "[", 
       RowBox[{
-      "finds", " ", "the", " ", "first", " ", "minimum", " ", "value", " ", 
-       "of", " ", "r", " ", "where", " ", "t", " ", "is", " ", "between", " ",
-        "0", " ", "and", " ", "maxAirtime"}], "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"timeClosestToEarth", "=", 
-      RowBox[{"t", "/.", 
-       RowBox[{"closestToEarth", "[", 
-        RowBox[{"[", "2", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-       RowBox[{
-       "if", " ", "the", " ", "closest", " ", "the", " ", "projectile", " ", 
-        "gets", " ", "is", " ", "less", " ", "than", " ", "the", " ", 
-        "radius", " ", "of", " ", "the", " ", "Earth"}], "..."}], "*)"}], 
-     "\[IndentingNewLine]", 
-     RowBox[{"If", "[", 
-      RowBox[{
-       RowBox[{
-        RowBox[{"closestToEarth", "[", 
-         RowBox[{"[", "1", "]"}], "]"}], "<", "radiusEarth"}], ",", 
+       RowBox[{"t", "=", "0"}], ",", 
+       RowBox[{"t", "<", "simulationRuntime"}], ",", 
+       RowBox[{"t", "+=", 
+        RowBox[{"1", "/", "pointDensity"}]}], ",", "\[IndentingNewLine]", 
        "\[IndentingNewLine]", 
-       RowBox[{"timeToGround", "=", 
-        RowBox[{"t", "/.", 
-         RowBox[{"FindRoot", "[", 
-          RowBox[{
-           RowBox[{
-            RowBox[{"Norm", "[", "r", "]"}], "==", "radiusEarth"}], ",", 
-           RowBox[{"{", 
-            RowBox[{"t", ",", 
-             RowBox[{"timeClosestToEarth", "/", "2"}]}], "}"}]}], "]"}]}]}], 
-       ",", " ", 
        RowBox[{"(*", 
         RowBox[{
-        "look", " ", "for", " ", "when", " ", "the", " ", "projectile", " ", 
-         "hits", " ", "the", " ", 
-         RowBox[{"ground", "!"}]}], "*)"}], "\[IndentingNewLine]", 
-       RowBox[{"timeToGround", "=", "maxAirTime"}]}], " ", 
-      RowBox[{"(*", 
+        "find", " ", "force", " ", "based", " ", "on", " ", "current", " ", 
+         "position"}], "*)"}], "\[IndentingNewLine]", 
        RowBox[{
-        RowBox[{
-        "the", " ", "projectile", " ", "never", " ", "hits", " ", "the", " ", 
-         "ground"}], ",", " ", 
-        RowBox[{
-        "so", " ", "we", " ", "set", " ", "plot", " ", "all", " ", "of", " ", 
-         "maxAirTime"}]}], "*)"}], "\[IndentingNewLine]", "]"}], ";", 
-     "\[IndentingNewLine]", "\[IndentingNewLine]", 
-     RowBox[{"tempPlot", "=", 
-      RowBox[{"Plot", "[", 
-       RowBox[{
-        RowBox[{"{", 
+        RowBox[{"r", "=", 
+         RowBox[{"centerOfEarth", "-", "currentPos"}]}], ";", " ", 
+        RowBox[{"(*", 
          RowBox[{
-          RowBox[{"Norm", "[", "r", "]"}], ",", "radiusEarth"}], "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"t", ",", "0", ",", "10"}], "}"}]}], "]"}]}], ";", 
-     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+         "r", " ", "is", " ", "a", " ", "vector", " ", "from", " ", "the", 
+          " ", "projectile", " ", "to", " ", "the", " ", "center", " ", "of", 
+          " ", "the", " ", "earth"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"forceGravitation", "=", 
+         RowBox[{
+          RowBox[{"r", "*", 
+           RowBox[{"(", 
+            RowBox[{"bigG", "*", "mass", "*", 
+             RowBox[{"massEarth", "/", 
+              RowBox[{
+               RowBox[{"Norm", "[", "r", "]"}], "^", "3"}]}]}], ")"}]}], "//",
+           "Chop"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"find", " ", "acc"}], ",", " ", "vel", ",", " ", 
+          RowBox[{"and", " ", "position"}]}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"t", "<", "timeThrustApplied"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"force", "=", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"thrustx", ",", "thrusty"}], "}"}], "+", 
+            "forceGravitation"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"force", "=", "forceGravitation"}]}], "\[IndentingNewLine]",
+          "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"acc", "=", 
+         RowBox[{"force", "/", "mass"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"nextVel", "=", 
+         RowBox[{"currentVel", "+", 
+          RowBox[{"Integrate", "[", 
+           RowBox[{"acc", ",", 
+            RowBox[{"{", 
+             RowBox[{"var", ",", "t", ",", 
+              RowBox[{"t", "+", 
+               RowBox[{"1", "/", "pointDensity"}]}]}], "}"}]}], "]"}]}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"nextPos", "=", 
+         RowBox[{"currentPos", "+", 
+          RowBox[{"Integrate", "[", 
+           RowBox[{"currentVel", ",", 
+            RowBox[{"{", 
+             RowBox[{"var", ",", "t", ",", 
+              RowBox[{"t", "+", 
+               RowBox[{"1", "/", "pointDensity"}]}]}], "}"}]}], "]"}]}]}], 
+        ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"plot", " ", "current", " ", "position"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"projectileTrackingPoints", ",", "currentPos"}], "]"}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"update", " ", "pos", " ", "and", " ", "vel"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"currentVel", "=", "nextVel"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"currentPos", "=", "nextPos"}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "Ends", " ", "simulation", " ", "if", " ", "the", " ", "projectile", 
+          " ", "hits", " ", "the", " ", "Earth"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Norm", "[", "r", "]"}], "<", "radiusEarth"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"t", "=", "simulationRuntime"}]}], "\[IndentingNewLine]", 
+         "]"}], ";"}]}], "\[IndentingNewLine]", "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
      RowBox[{"(*", 
-      RowBox[{"set", " ", "up", " ", "the", " ", "parametric", " ", "plot"}], 
-      "*)"}], "\[IndentingNewLine]", 
-     RowBox[{"freefallPlot", "=", 
-      RowBox[{"ParametricPlot", "[", 
-       RowBox[{"pos", ",", 
-        RowBox[{"{", 
-         RowBox[{"t", ",", "0", ",", "timeToGround"}], "}"}], ",", 
-        RowBox[{"PlotStyle", "->", 
+      RowBox[{"typical", " ", "orbit", " ", "distances"}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"plotBound", "=", 
+      RowBox[{
+       RowBox[{"5000", "*", "1000"}], "+", "radiusEarth"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"minLEO", "=", 
+      RowBox[{
+       RowBox[{"160", "*", "1000"}], "+", "radiusEarth"}]}], ";", " ", 
+     RowBox[{"(*", 
+      RowBox[{"500", " ", "kilometers"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"maxLEO", "=", 
+      RowBox[{
+       RowBox[{"2000", "*", "1000"}], "+", "radiusEarth"}]}], ";", 
+     RowBox[{"(*", 
+      RowBox[{"2000", " ", "kilometers"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"minMEO", "=", 
+      RowBox[{
+       RowBox[{"2160", "*", "1000"}], "+", "radiusEarth"}]}], ";", " ", 
+     RowBox[{"(*", 
+      RowBox[{"2160", " ", "kilometers"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"maxMEO", "=", 
+      RowBox[{
+       RowBox[{"35000", "*", "1000"}], "+", "radiusEarth"}]}], ";", 
+     RowBox[{"(*", 
+      RowBox[{"35000", " ", "kilometers"}], "*)"}], "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"trackingPointsPlot", "=", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"projectileTrackingPoints", ",", 
+        RowBox[{"PlotRange", "->", 
          RowBox[{"{", 
-          RowBox[{"Red", ",", " ", "Dashed"}], "}"}]}]}], "]"}]}], ";", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "plotBound"}], ",", "plotBound"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"-", "plotBound"}], ",", "plotBound"}], "}"}]}], "}"}]}],
+         ",", 
+        RowBox[{"PlotStyle", "->", "Red"}], ",", 
+        RowBox[{"AspectRatio", "->", "1"}], ",", 
+        RowBox[{"PlotMarkers", "->", 
+         RowBox[{"{", 
+          RowBox[{"Automatic", ",", "Tiny"}], "}"}]}]}], "]"}]}], ";", 
      "\[IndentingNewLine]", "\[IndentingNewLine]", 
      RowBox[{"(*", 
       RowBox[{
@@ -625,24 +609,56 @@ Cell[BoxData[
           RowBox[{"centerOfEarth", ",", "radiusEarth"}], "]"}]}], "}"}], 
        "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
      RowBox[{"(*", 
-      RowBox[{"Show", " ", "the", " ", "final", " ", "plot"}], "*)"}], 
+      RowBox[{"set", " ", "up", " ", "orbit", " ", "rings"}], "*)"}], 
      "\[IndentingNewLine]", 
+     RowBox[{"LEOring", "=", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{"{", 
+        RowBox[{"Pink", ",", 
+         RowBox[{"Opacity", "[", "0.3", "]"}], ",", 
+         RowBox[{"Annulus", "[", 
+          RowBox[{"centerOfEarth", ",", 
+           RowBox[{"{", 
+            RowBox[{"minLEO", ",", "maxLEO"}], "}"}]}], "]"}]}], "}"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"MEOring", "=", 
+      RowBox[{"Graphics", "[", 
+       RowBox[{"{", 
+        RowBox[{"Blue", ",", 
+         RowBox[{"Opacity", "[", "0.15", "]"}], ",", 
+         RowBox[{"Annulus", "[", 
+          RowBox[{"centerOfEarth", ",", 
+           RowBox[{"{", 
+            RowBox[{"minMEO", ",", "maxMEO"}], "}"}]}], "]"}]}], "}"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
      RowBox[{"Show", "[", 
       RowBox[{
        RowBox[{"{", 
-        RowBox[{"earthObject", ",", "thrustPlot", ",", "freefallPlot"}], 
-        "}"}], ",", 
+        RowBox[{
+        "trackingPointsPlot", ",", "earthObject", ",", "LEOring", ",", 
+         "MEOring"}], "}"}], ",", 
        RowBox[{"Axes", "->", "True"}], ",", 
-       RowBox[{"PlotRange", "->", "All"}], ",", 
-       RowBox[{"AxesLabel", "->", 
-        RowBox[{"{", 
-         RowBox[{"\"\<x Position\>\"", ",", "\"\<y Position\>\""}], "}"}]}], 
-       ",", 
-       RowBox[{"PlotLabel", "->", 
-        RowBox[{"StringForm", "[", 
-         RowBox[{"\"\<Time to ground: `` seconds\>\"", ",", 
-          RowBox[{"timeThrustApplied", "+", "timeToGround"}]}], "]"}]}]}], 
-      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+       RowBox[{"AspectRatio", "->", "1"}]}], "]"}]}]}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"variablethrusttime", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"TwoStageOrbitIncremented", "[", 
+      RowBox[{"60000", ",", "60000", ",", "tx", ",", "5000", ",", 
+       RowBox[{"3600", " ", "10"}], ",", "0"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"tx", ",", "0", ",", "900", ",", "10"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Export", "[", 
+   RowBox[{"\"\<variableThrusttime.gif\>\"", ",", "variablethrusttime", ",", 
+    RowBox[{"AnimationRate", "\[Rule]", "10"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
  CellChangeTimes->{{3.879087972862998*^9, 3.8790879881388793`*^9}, {
    3.8790880480688534`*^9, 3.8790880600005894`*^9}, {3.879088210292324*^9, 
    3.8790882288213887`*^9}, {3.8791012625617657`*^9, 
@@ -650,9 +666,35 @@ Cell[BoxData[
    3.8791016309670486`*^9, 3.8791016340863028`*^9}, 3.879101848930662*^9, {
    3.8791019041100664`*^9, 3.879101934175416*^9}, {3.879102097366672*^9, 
    3.8791021106644783`*^9}, {3.879102227057432*^9, 3.8791022960604916`*^9}, {
-   3.8791023595009685`*^9, 
-   3.8791023994263883`*^9}},ExpressionUUID->"3f3d19c0-3568-45df-8c86-\
-9378e52637c4"],
+   3.8791023595009685`*^9, 3.8791023994263883`*^9}, 3.8793689111506615`*^9, {
+   3.8793689569063025`*^9, 3.8793689888789988`*^9}, {3.879369101630164*^9, 
+   3.879369144005932*^9}, {3.8793692364830008`*^9, 3.879369318611333*^9}, {
+   3.8793694498455734`*^9, 3.8793694561415014`*^9}, {3.87936948631807*^9, 
+   3.8793694879167023`*^9}, {3.8793695507081203`*^9, 
+   3.8793695522713127`*^9}, {3.879369596593242*^9, 3.8793697200272713`*^9}, {
+   3.879369770664115*^9, 3.8793697731838408`*^9}, {3.8793698086744833`*^9, 
+   3.879369904540701*^9}, {3.879370002557945*^9, 3.879370006858427*^9}, {
+   3.8793700959985332`*^9, 3.8793701172860184`*^9}, {3.8793701565420732`*^9, 
+   3.8793704887339544`*^9}, {3.8793705316275907`*^9, 
+   3.8793706384763174`*^9}, {3.8793736927153544`*^9, 
+   3.8793737960421443`*^9}, {3.879374019145203*^9, 3.8793741642907867`*^9}, {
+   3.8793746384487267`*^9, 3.879374679448388*^9}, {3.8793816488167906`*^9, 
+   3.879381651391227*^9}, {3.8793816879370775`*^9, 3.879381770493133*^9}, {
+   3.879381836463458*^9, 3.8793818367581987`*^9}, {3.8793819375614843`*^9, 
+   3.8793819451437654`*^9}, {3.8793820192257233`*^9, 3.879382072067073*^9}, {
+   3.8793821102850733`*^9, 3.8793821105509806`*^9}, {3.8793821590436015`*^9, 
+   3.879382191065381*^9}, {3.8793822237338705`*^9, 3.879382615814809*^9}, {
+   3.8793827452964487`*^9, 3.8793827641223707`*^9}, {3.8793828114440355`*^9, 
+   3.8793828158275304`*^9}, {3.8793828995550423`*^9, 
+   3.8793829124909143`*^9}, {3.879382953470981*^9, 3.8793829566920395`*^9}, {
+   3.8793829897812853`*^9, 3.879383003723752*^9}, {3.879383058949608*^9, 
+   3.8793830773592634`*^9}, {3.8793831628420534`*^9, 3.879383174800556*^9}, {
+   3.8793832292640643`*^9, 3.8793832417572775`*^9}, {3.879383308277214*^9, 
+   3.879383310583952*^9}, {3.8793833677765903`*^9, 3.8793833679585533`*^9}, {
+   3.8793835486404133`*^9, 3.8793835496428127`*^9}, 3.8793836054130797`*^9, {
+   3.8793836520310297`*^9, 3.879383681493761*^9}},
+ CellLabel->
+  "In[159]:=",ExpressionUUID->"3f3d19c0-3568-45df-8c86-9378e52637c4"],
 
 Cell["\<\
 massEarth=5.97219 10^24;
@@ -697,8 +739,8 @@ Cell[5350, 112, 7802, 191, 876, "Input",ExpressionUUID->"d266155a-8709-41f3-a8df
 Cell[CellGroupData[{
 Cell[13189, 308, 166, 3, 33, "Subsection",ExpressionUUID->"fd45afbd-6b8a-4bde-8c53-5305dce47526"],
 Cell[13358, 313, 5404, 95, 150, "Text",ExpressionUUID->"3a8037e1-a1a0-4a18-9639-d253c9272ec5"],
-Cell[18765, 410, 10471, 244, 1199, "Input",ExpressionUUID->"3f3d19c0-3568-45df-8c86-9378e52637c4"],
-Cell[29239, 656, 240, 8, 99, "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
+Cell[18765, 410, 13260, 286, 1536, "Input",ExpressionUUID->"3f3d19c0-3568-45df-8c86-9378e52637c4"],
+Cell[32028, 698, 240, 8, 99, "Text",ExpressionUUID->"eaf080aa-94a4-4a30-888c-a9cc5c1e7424"]
 }, Open  ]]
 }, Open  ]]
 }
